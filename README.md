@@ -15,7 +15,10 @@ I use pfSense. The easiest thing to do is to backup your configuration and parse
 I have also installed the pfSense API and use the following aliases:
 
 ```
+# You can set PFAUTH statically or use references from a 1password vault ; do a "op signin" before using this....
 export PFAUTH='Authorization: SHORT-HEX LONG-HEX'
+export PFAUTH="Authorization: "`op read "op://Private/pfSense API Key/username"`" "`op read "op://Private/pfSense API Key/password"`
+
 export PFURL='https://10.0.0.1/api/v1'
 pharmdevices() {  curl -H "$PFAUTH" -sk "${PFURL}/services/dhcpd/static_mapping?interface=lan" | jq -c '.data[] | [ .ipaddr, .hostname, .mac ]' ; }
 pharmleases() {  curl -H "$PFAUTH" -sk "${PFURL}/services/dhcpd/lease" | jq -c '.data[]' ; }
