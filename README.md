@@ -15,9 +15,11 @@ I use pfSense. The easiest thing to do is to backup your configuration and parse
 I have also installed the pfSense API and use the following aliases:
 
 ```
-pharmdevices() {  curl -H 'Authorization: SHORT-HEX LONG-HEX' -sk 'http://10.0.0.1/api/v1/services/dhcpd/static_mapping?interface=lan' | jq -c '.data[] | [ .ipaddr, .hostname, .mac ]' ; }
-pharmleases() {  curl -H 'Authorization: SHORT-HEX LONG-HEX' -sk 'http://10.0.0.1/api/v1/services/dhcpd/lease' | jq -c '.data[]' ; }
-pharmarp() {  curl -H 'Authorization: SHORT-HEX LONG-HEX' -sk 'http://10.0.0.1/api/v1/system/arp' | jq -c '.data[] | [.interface, .mac, .ip]'  ; }
+export PFAUTH='Authorization: SHORT-HEX LONG-HEX'
+export PFURL='https://10.0.0.1/api/v1'
+pharmdevices() {  curl -H "$PFAUTH" -sk "${PFURL}/services/dhcpd/static_mapping?interface=lan" | jq -c '.data[] | [ .ipaddr, .hostname, .mac ]' ; }
+pharmleases() {  curl -H "$PFAUTH" -sk "${PFURL}/services/dhcpd/lease" | jq -c '.data[]' ; }
+pharmarp() {  curl -H "$PFAUTH" -sk "${PFURL}/system/arp" | jq -c '.data[] | [.interface, .mac, .ip]'  ; }
 ```
 
 ### Scanning
