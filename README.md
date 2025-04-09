@@ -6,13 +6,13 @@
 
 You can setup a username/password but doing key based auth seems wise:
 
-`ssh-keygen -t rsa -f ~/.ssh/pfsense-apikey`
+`ssh-keygen -t rsa -f ~/.ssh/unifi-apikey`
 
-Then copy the public key from `cat ~/.ssh/pfsense-apikey.pub` over to Unifi under System > Advanced > Device Authentication.
+Then copy the public key from `cat ~/.ssh/unifi-apikey.pub` over to Unifi under System > Advanced > Device Authentication.
 
 For the examples below we will assume you're doing key auth to a user named admin and the key file is in an environment variable like this:
 
-`export PFKEY=~/.ssh/pfsense-apikey`
+`export PFKEY=~/.ssh/unifi-apikey`
 
 ###  Network Switches
 I use Ubiquiti switches. These support connections via SSH and it's possible to get switch information from them. Mostly this is good to get MAC addresses.
